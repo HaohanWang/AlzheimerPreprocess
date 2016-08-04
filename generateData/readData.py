@@ -4,8 +4,8 @@ __author__ = 'Haohan Wang'
 
 import sys
 
-gPath = sys.argv[1]
-pPath = sys.argv[2]
+gPath = '/nfs/nas-0-16/hbtrc/genotype/illumina/genotype.txt'
+pPath = '/nfs/nas-0-16/hbtrc/phenotype/phenotype.txt'
 
 def readGenotype(gpath):
     text = [line.strip() for line in open(gpath)]
