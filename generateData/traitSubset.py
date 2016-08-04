@@ -27,7 +27,7 @@ def getSubset():
 
 def getSubsetSNP():
     snps = [line.strip().split(',') for line in open('snps.csv')]
-    markers = [line.strip() for line in open('markers.csv')]
+    markers = [line.strip() for line in open('marker.csv')]
 
     snps_new = []
     for line in snps:
