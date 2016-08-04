@@ -60,8 +60,8 @@ def saveGenoPheno(gpath, ppath):
     traits = []
     for k in geno:
         if k in pheno:
-            snps.append(geno)
-            traits.append(pheno)
+            snps.append(geno[k])
+            traits.append(pheno[k])
 
     f1 = open('snps.csv', 'w')
     for line in snps:
