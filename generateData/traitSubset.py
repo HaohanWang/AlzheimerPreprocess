@@ -43,4 +43,4 @@ def getSubsetSNP():
     f2.close()
 
 if __name__ == '__main__':
-    getSubset()
+    getSubsetSNP()
