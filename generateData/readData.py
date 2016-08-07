@@ -46,8 +46,14 @@ def readPhenoType(ppath):
     for k in idmap2:
         pheno[k] = []
 
+    phenoList = {}
     for line in text[1:]:
-        items = line.split('\t')[1:]
+        items = line.split()
+        k = int(items[0])
+        phenoList[k] = items[1:]
+
+    for k in range(1001, 1044):
+        items = phenoList[k]
         for i in range(len(items)):
             pheno[idmap[i]].append(items[i])
     return pheno
