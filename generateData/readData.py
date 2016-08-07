@@ -42,6 +42,9 @@ def readPhenoType(ppath):
         idmap[i] = ids[i]
         idmap2[ids[i]] = i
 
+    print idmap
+    print idmap2
+
     pheno = {}
     for k in idmap2:
         pheno[k] = []
@@ -59,8 +62,8 @@ def readPhenoType(ppath):
     return pheno
 
 def saveGenoPheno(gpath, ppath):
-    geno = readGenotype(gpath)
     pheno = readPhenoType(ppath)
+    geno = readGenotype(gpath)
 
     snps = []
     traits = []
