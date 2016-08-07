@@ -57,6 +57,7 @@ def readPhenoType(ppath):
 
     for k in range(1001, 1044):
         items = phenoList[k]
+        print len(items)
         for i in range(len(items)):
             pheno[idmap[i]].append(items[i])
     return pheno
