@@ -51,7 +51,7 @@ def readPhenoType(ppath):
 
     phenoList = {}
     for line in text[1:]:
-        items = line.split()
+        items = line.split('\t')
         k = int(items[0])
         phenoList[k] = items[1:]
 
