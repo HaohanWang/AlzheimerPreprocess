@@ -23,7 +23,10 @@ def readGenotype(gpath):
     for line in text[1:]:
         items = line.split()[1:]
         for i in range(len(items)):
-            m = items[i].split('/')
+            if items[i][1] == '/':
+                m = items[i].split('/')
+            else:
+                m = ['0', '0']
             geno[idmap[i]].extend(m)
     return geno
 
