@@ -2,6 +2,9 @@ __author__ = 'Haohan Wang'
 
 gPath = '/nfs/nas-0-16/hbtrc/genotype/illumina/genotype.txt'
 pPath = '/nfs/nas-0-16/hbtrc/phenotype/phenotype.txt'
+#
+# gPath = '../testData/snps.txt'
+# pPath = '../testData/marker.txt'
 
 def readGenotype(gpath):
     text = [line.strip() for line in open(gpath)]
@@ -54,13 +57,12 @@ def readPhenoType(ppath):
             v = '1'
         else:
             v = 'N'
-        pheno[idmap[i]].append(v)
+        pheno[idmap[i]] = v
     return pheno
 
-def saveGenoPheno(gpath, ppath):
+def savePedFile(gpath, ppath):
     pheno = readPhenoType(ppath)
     geno = readGenotype(gpath)
-
     snps = []
     for k in geno:
         if k in pheno:
@@ -76,6 +78,18 @@ def saveGenoPheno(gpath, ppath):
         f1.writelines('\t'.join(line)+'\n')
     f1.close()
 
+def saveMapFile(gpath):
+    text = [line.strip() for line in open(gpath)][1:]
+    marker = []
+    for line in text:
+        items = line.split()
+        marker.append((items[3], items[1], '0', items[-1]))
+    f1 = open('snps.map', 'w')
+    for a in marker:
+        f1.writelines('\t'.join(a) + '\n')
+    f1.close()
+
 
 if __name__ == '__main__':
-    saveGenoPheno(gPath, pPath)
+    savePedFile(gPath, pPath)
+    saveMapFile(gpath=gPath)
