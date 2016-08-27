@@ -50,17 +50,26 @@ def readPhenoType(ppath):
         k = int(items[0])
         phenoList[k] = items[1:]
 
-    k = 1029
-    items = phenoList[k]
-    print len(items)
-    for i in range(len(items)):
-        if items[i] == 'F':
-            v = '2'
-        elif items[i] == 'M':
-            v = '1'
-        else:
-            v = 'N'
-        pheno[idmap[i]] = v
+    for k in [1029, 1032]:
+        items = phenoList[k]
+        print len(items)
+        for i in range(len(items)):
+            if k == 1029:
+                if items[i] == 'F':
+                    v = '2'
+                elif items[i] == 'M':
+                    v = '1'
+                else:
+                    v = 'N'
+            else:
+                if items[i] == 'control':
+                    v = '0'
+                elif items[i] == 'affected':
+                    v = '1'
+                else:
+                    print 'a'
+                    v = None
+            pheno[idmap[i]].append(v)
     return pheno
 
 def savePedFile(gpath, ppath):
@@ -69,9 +78,9 @@ def savePedFile(gpath, ppath):
     snps = []
     for k in geno:
         if k in pheno:
-            m = ['FAM0', str(k), '0', '0', pheno[k], '0']
+            m = ['FAM0', str(k), '0', '0', pheno[k][0], pheno[k][1]]
         else:
-            m = ['FAM0', str(k), '0', '0', 'N', '0']
+            m = ['FAM0', str(k), '0', '0', 'N', 'N']
         m.extend(geno[k])
         snps.append(m)
 
