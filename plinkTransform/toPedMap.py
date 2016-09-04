@@ -1,6 +1,7 @@
 __author__ = 'Haohan Wang'
 
 gPath = '/nfs/nas-0-16/hbtrc/genotype/illumina/genotype.txt'
+mPath = '/nfs/nas-0-16/hbtrc/genotype/illumina/marker.txt'
 pPath = '/nfs/nas-0-16/hbtrc/phenotype/phenotype.txt'
 #
 # gPath = '../testData/snps.txt'
@@ -104,4 +105,4 @@ def saveMapFile(gpath):
 
 if __name__ == '__main__':
     savePedFile(gPath, pPath)
-    saveMapFile(gpath=gPath)
+    saveMapFile(gpath=mPath)
