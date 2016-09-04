@@ -7,7 +7,7 @@ def checkMapFile(gpath):
     for line in text:
         items = line.split()
         marker.append((items[3], items[1], '0', items[-1]))
-        if int(items[3]) == 0:
+        if items[3] == '0':
             print line, count
         count += 1
     # f1 = open('snps.map', 'w')
