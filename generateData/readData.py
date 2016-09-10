@@ -6,6 +6,7 @@ import sys
 
 gPath = '/nfs/nas-0-16/hbtrc/genotype/illumina/genotype.txt'
 pPath = '/nfs/nas-0-16/hbtrc/phenotype/phenotype.txt'
+ePath = "/nfs/nas-0-16/hbtrc/expression/agilent/cerebellum/gene_expression.txt"
 
 def readGenotype(gpath):
     text = [line.strip() for line in open(gpath)]
@@ -62,16 +63,22 @@ def readPhenoType(ppath):
             pheno[idmap[i]].append(items[i])
     return pheno
 
-def saveGenoPheno(gpath, ppath):
+def saveGenoPheno(gpath, ppath, epath):
     pheno = readPhenoType(ppath)
     geno = readGenotype(gpath)
+    ge = readExpression(epath)
 
     snps = []
     traits = []
+    exp = []
     for k in geno:
         if k in pheno:
-            snps.append(geno[k])
-            traits.append(pheno[k])
+            if k in ge:
+                snps.append(geno[k])
+                traits.append(pheno[k])
+                exp.append(ge[k])
+            else:
+                print k, '!'
 
     f1 = open('snps.csv', 'w')
     for line in snps:
@@ -84,5 +91,40 @@ def saveGenoPheno(gpath, ppath):
         f2.writelines(','.join(line)+'\n')
     f2.close()
 
+    f3 = open('expression.csv', 'w')
+    for line in exp:
+        f3.writelines(','.join(line)+'\n')
+    f3.close()
+
+def readExpression(epath):
+    text = [line.strip() for line in open(epath)]
+    idtext = text[0].split()
+    ids = [int(it) for it in idtext[1:]]
+    idmap = {} # position 2 id
+    idmap2 = {} # id 2 position
+    for i in range(len(ids)):
+        idmap[i] = ids[i]
+        idmap2[ids[i]] = i
+
+    ge = {}
+    for k in idmap2:
+        ge[k] = []
+
+    geList = {}
+    geneIDs = []
+    for line in text[1:]:
+        items = line.split('\t')
+        k = int(items[0])
+        geneIDs.append(k)
+        geList[k] = items[1:]
+
+    for k in geneIDs:
+        items = geList[k]
+        print len(items)
+        for i in range(len(items)):
+            ge[idmap[i]].append(items[i])
+    return ge
+
+
 if __name__ == '__main__':
-    saveGenoPheno(gPath, pPath)
+    saveGenoPheno(gPath, pPath, ePath)
