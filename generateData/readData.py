@@ -66,19 +66,19 @@ def readPhenoType(ppath):
 def saveGenoPheno(gpath, ppath, epath):
     pheno = readPhenoType(ppath)
     geno = readGenotype(gpath)
-    ge = readExpression(epath)
+    # ge = readExpression(epath)
 
     snps = []
     traits = []
-    exp = []
+    # exp = []
     for k in geno:
         if k in pheno:
-            if k in ge:
+            # if k in ge:
                 snps.append(geno[k])
                 traits.append(pheno[k])
-                exp.append(ge[k])
-            else:
-                print k, '!'
+                # exp.append(ge[k])
+            # else:
+            #     print k, '!'
 
     f1 = open('snps.csv', 'w')
     for line in snps:
@@ -91,40 +91,53 @@ def saveGenoPheno(gpath, ppath, epath):
         f2.writelines(','.join(line)+'\n')
     f2.close()
 
+    # f3 = open('expression.csv', 'w')
+    # for line in exp:
+    #     f3.writelines(','.join(line)+'\n')
+    # f3.close()
+
+def saveExpression(epath):
+    # text = [line.strip() for line in open(epath)]
+    # idtext = text[0].split()
+    # ids = [int(it) for it in idtext[1:]]
+    # idmap = {} # position 2 id
+    # idmap2 = {} # id 2 position
+    # for i in range(len(ids)):
+    #     idmap[i] = ids[i]
+    #     idmap2[ids[i]] = i
+    #
+    # ge = {}
+    # for k in idmap2:
+    #     ge[k] = []
+    #
+    # geList = {}
+    # geneIDs = []
+    # for line in text[1:]:
+    #     items = line.split('\t')
+    #     k = int(items[0])
+    #     geneIDs.append(k)
+    #     geList[k] = items[1:]
+    #
+    # for k in geneIDs:
+    #     items = geList[k]
+    #     print len(items)
+    #     for i in range(len(items)):
+    #         ge[idmap[i]].append(items[i])
+    # return ge
+    text = [line.strip() for line in open(epath)][1:]
     f3 = open('expression.csv', 'w')
-    for line in exp:
-        f3.writelines(','.join(line)+'\n')
-    f3.close()
-
-def readExpression(epath):
-    text = [line.strip() for line in open(epath)]
-    idtext = text[0].split()
-    ids = [int(it) for it in idtext[1:]]
-    idmap = {} # position 2 id
-    idmap2 = {} # id 2 position
-    for i in range(len(ids)):
-        idmap[i] = ids[i]
-        idmap2[ids[i]] = i
-
-    ge = {}
-    for k in idmap2:
-        ge[k] = []
-
-    geList = {}
-    geneIDs = []
-    for line in text[1:]:
+    f4 = open('geneID.csv', 'w')
+    idl = []
+    for line in text:
         items = line.split('\t')
-        k = int(items[0])
-        geneIDs.append(k)
-        geList[k] = items[1:]
-
-    for k in geneIDs:
-        items = geList[k]
-        print len(items)
-        for i in range(len(items)):
-            ge[idmap[i]].append(items[i])
-    return ge
+        id = items[0]
+        idl.append(id)
+        f3.writelines(','.join(items[1:])+'\n')
+        f4.writelines(id+'\n')
+    f3.close()
+    f4.close()
 
 
 if __name__ == '__main__':
-    saveGenoPheno(gPath, pPath, ePath)
+    # saveGenoPheno(gPath, pPath, ePath)
+    saveExpression(ePath)
