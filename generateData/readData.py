@@ -132,7 +132,13 @@ def saveExpression(epath):
         items = line.split('\t')
         id = items[0]
         idl.append(id)
-        f3.writelines(','.join(items[1:])+'\n')
+        m = []
+        for tmp in items[1:]:
+            if tmp == 'NA':
+                m.append('0')
+            else:
+                m.append(tmp)
+        f3.writelines(','.join(m)+'\n')
         f4.writelines(id+'\n')
     f3.close()
     f4.close()
