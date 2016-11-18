@@ -145,5 +145,5 @@ def saveExpression(epath):
 
 
 if __name__ == '__main__':
-    # saveGenoPheno(gPath, pPath, ePath)
-    saveExpression(ePath)
+    saveGenoPheno(gPath, pPath, ePath)
+    # saveExpression(ePath)
