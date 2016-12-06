@@ -1,6 +1,8 @@
 __author__ = 'Haohan Wang'
 
-text = [line.strip() for line in open('../data/traits.csv')]
+path = "/home/haohanwang/Downloads/AlzData/"
+
+text = [line.strip() for line in open(path + 'traits.csv')]
 
 data = []
 for line in text:
@@ -32,7 +34,7 @@ for line in text:
 
     data.append(l)
 
-f = open('../data/traits_clean.csv', 'w')
+f = open(path + 'traits_clean.csv', 'w')
 for line in data:
     f.writelines(','.join(line)+'\n')
 f.close()
