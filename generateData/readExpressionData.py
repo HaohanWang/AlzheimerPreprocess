@@ -50,20 +50,13 @@ def readExpression(epath):
     for k in idmap2:
         exp[k] = []
 
-    c = -1
-    t = 0
     for line in text[1:]:
-        c+=1
         items = line.split()[1:]
-        if c == 0:
-            t = len(items)
-        if len(items) == t:
-            print t, len(items)
-            for i in range(len(items)):
-                if items[i]!= 'NA':
-                    exp[idmap[i]].append(float(items[i]))
-                else:
-                    exp[idmap[i]].append(0)
+        for i in range(len(items)):
+            if items[i]!= 'NA':
+                exp[idmap[i]].append(float(items[i]))
+            else:
+                exp[idmap[i]].append(0)
     return exp
 
 def saveExpressionPheno(ppath, epath):
@@ -75,6 +68,7 @@ def saveExpressionPheno(ppath, epath):
     # exp = []
     for k in ge:
         if k in pheno:
+            if len(ge[k]) == 40638:
             # if k in ge:
                 snps.append(ge[k])
                 traits.append(pheno[k])
