@@ -82,8 +82,11 @@ def saveExpressionPheno(ppath, epath):
             #     print k, '!'
 
     f1 = open('ge.csv', 'w')
+    c = -1
     for line in snps:
+        c += 1
         l = [str(a) for a in line]
+        print c, len(l)
         f1.writelines(','.join(l)+'\n')
     f1.close()
 
