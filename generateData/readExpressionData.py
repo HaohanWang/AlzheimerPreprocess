@@ -58,6 +58,7 @@ def readExpression(epath):
         if c == 0:
             t = len(items)
         if len(items) == t:
+            print t, len(items)
             for i in range(len(items)):
                 if items[i]!= 'NA':
                     exp[idmap[i]].append(float(items[i]))
