@@ -52,13 +52,8 @@ def readExpression(epath):
 
     for line in text[1:]:
         items = line.split()[1:]
-        base = items[0]
         for i in range(len(items)):
-            if items[i] == base:
-                v = 0
-            else:
-                v = 1
-            exp[idmap[i]].append(v)
+            exp[idmap[i]].append(float(items))
     return exp
 
 def saveExpressionPheno(ppath, epath):
