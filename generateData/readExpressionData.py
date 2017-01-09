@@ -53,7 +53,10 @@ def readExpression(epath):
     for line in text[1:]:
         items = line.split()[1:]
         for i in range(len(items)):
-            exp[idmap[i]].append(float(items[i]))
+            if items[i]!= 'NA':
+                exp[idmap[i]].append(float(items[i]))
+            else:
+                exp[idmap[i]].append(0)
     return exp
 
 def saveExpressionPheno(ppath, epath):
